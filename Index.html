@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HACKER TERMINAL</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#020805;color:#00ff66;
+  font-family:monospace;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;overflow:hidden
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(
+  transparent 0px,transparent 3px,
+  #00ff660b 4px,#00ff660b 5px)
+}
+.box{
+  width:100%;max-width:500px;border:1px solid #00ff66;
+  padding:22px;border-radius:12px;
+  box-shadow:0 0 25px #00ff6630;background:#031008
+}
+h1{text-align:center;text-shadow:0 0 12px #00ff66}
+.small{text-align:center;color:#70ff9b}
+#terminal{
+  height:230px;overflow:auto;background:#000;
+  border:1px solid #174d29;padding:12px;
+  font-size:13px;line-height:1.8;overflow-wrap:anywhere
+}
+button{
+  width:100%;margin-top:18px;padding:15px;
+  color:#001b09;background:#00ff66;border:0;
+  border-radius:7px;font-weight:bold;font-size:16px
+}
+button:active{transform:scale(.98)}
+#result{text-align:center;font-size:25px;font-weight:bold}
+.note{font-size:11px;color:#79b98c;text-align:center}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>☠ HACKER TERMINAL</h1>
+  <p class="small">SIMULATION MODE // DEMO ONLY</p>
+  <div id="terminal">
+    > Инициализация терминала...<br>
+    > Ожидание команды...
+  </div>
+  <button id="start" onclick="startHack()">
+    ⚡ ЗАПУСТИТЬ ВЗЛОМ
+  </button>
+  <div id="result"></div>
+  <p class="note">Это шуточная симуляция. Настоящего взлома нет.</p>
+</div>
+<script>
+const terminal=document.getElementById("terminal");
+const result=document.getElementById("result");
+const btn=document.getElementById("start");
+let running=false;
+
+function startHack(){
+  if(running)return;
+  running=true;
+  btn.disabled=true;
+  result.innerHTML="";
+  terminal.innerHTML="";
+  const lines=[
+    "> Подключение к секретному терминалу...",
+    "> Загрузка хакерского интерфейса...",
+    "> Поиск секретных файлов... DEMO",
+    "> Анализ космического сигнала...",
+    "> Обнаружен уровень крутости: 100%",
+    "> Взлом холодинок BILOL....",
+    "> Подготовка главного ID...",
+    "> СИМУЛЯЦИЯ ЗАВЕРШЕНА!"
+  ];
+  let i=0;
+  function next(){
+    if(i<lines.length){
+      terminal.innerHTML+=lines[i]+"<br>";
+      terminal.scrollTop=terminal.scrollHeight;
+      i++;
+      setTimeout(next,700);
+    }else{
+      result.innerHTML=
+        "<br> аккаунт был взломан!<br><span style='font-size:15px'>Тебя никто не взламывал!</span>";
+      btn.disabled=false;
+      btn.textContent="отменить взл акк";
+      running=false;
+    }
+  }
+  next();
+}
+</script>
+</body>
+</html>
